@@ -1,20 +1,19 @@
-pub fn b_pub() { println!("{}: b_pub", module_path!()); }
-pub(super) fn b_pub_supper() {
-    println!("{}: b_pub_supper", module_path!());
-}
-pub fn b_navigation_test() {
-    println!("{}: b_navigation_test", module_path!());
+// 本模块的变量定义
+const B_PRIVATE: &str = "B_PRIVATE";
+pub const B_PUB: &str = "B_PUB";
+pub(crate) const B_PUB_CRATE: &str = "B_PUB_CRATE";
+pub(super) const B_PUB_SUPER: &str = "B_PUB_SUPER";
 
-    // 验证规则：super 向上跳 (b -> a)
-    super::a_pub();
-    super::super::call_from_lib();
-    super::super::x::x_pub();
+pub fn b_visit() {
+    println!("\n>>> B_VISIT (Deep)");
 
-    // 验证规则：crate 绝对路径 (b -> lib -> a)
-    crate::a::a_pub();
-    // crate::x::x_private(); // 不能访问兄弟私有物
+    // 1. 访问父模块肯定没问题（在 a.rs 中已验证）
+    // 2. 访问「祖父」 
+    println!("super::super::LIB_PUB: {}", super::super::LIB_PUB); // 啰嗦
+    println!("crate::LIB_PRIVATE: {}", crate::LIB_PRIVATE); // ✅ 爷对孙亦无隐私 
 
-    // 验证规则：子看父私有 (b -> lib::root_private)
-    // 注意：虽然 root_private 没标 pub，但子模块有权访问
-    crate::root_utility_private();
+    // 3. 访问「远亲」 
+    println!("{}", crate::x::X_PUB);
+    // println!("{}", crate::x::X_PRIVATE); // ❌ 无法访问「父之兄弟」模块的私有成员
+    // println!("{}", super::super::x::X_PRIVATE); // ❌ 换种写法照样不行
 }
