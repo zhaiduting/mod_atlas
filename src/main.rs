@@ -1,4 +1,4 @@
-use mod_atlas::{a, lib_visit, LIB_PUB, X_PUB_RE};
+use mod_atlas::{a, lib_visit, LIB_PUB, x_visit_re};
 
 fn main() {
     println!("--- MAIN_RS START ---");
@@ -9,11 +9,8 @@ fn main() {
     a::b::b_visit();
     // mod_atlas::x::x_visit(); // ❌ 模块 x 是私有的，虽然它在 lib 里，但 main 看不见它
 
-    // 访问变量
-    println!("Direct access: {}, {}", LIB_PUB, X_PUB_RE); // ✅
-
-    // ❌ 权限测试
+    //  权限测试
     // println!("{}", mod_atlas::a::A_PRIVATE); // ❌
     // println!("{}", mod_atlas::x::X_PUB); // ❌ 无法访问私有模块的任何成员
-    println!("{}", X_PUB_RE); // ✅ 但可以访问私有模块中重新导出的成员
+    x_visit_re() // ✅ 但可以访问私有模块中重新导出的成员
 }

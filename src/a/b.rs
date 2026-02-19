@@ -9,11 +9,11 @@ pub fn b_visit() {
 
     // 1. 访问父模块肯定没问题（在 a.rs 中已验证）
     // 2. 访问「祖父」 
-    println!("super::super::LIB_PUB: {}", super::super::LIB_PUB); // 啰嗦
-    println!("crate::LIB_PRIVATE: {}", crate::LIB_PRIVATE); // ✅ 爷对孙亦无隐私 
+    inspect!( super::super::LIB_PUB); // 啰嗦
+    inspect!(  crate::LIB_PRIVATE); // ✅ 爷对孙亦无隐私
 
     // 3. 访问「远亲」 
-    println!("{}", crate::x::X_PUB);
-    // println!("{}", crate::x::X_PRIVATE); // ❌ 无法访问「父之兄弟」模块的私有成员
-    // println!("{}", super::super::x::X_PRIVATE); // ❌ 换种写法照样不行
+    inspect!( crate::x::X_PUB);
+    // inspect!( crate::x::X_PRIVATE); // ❌ 无法访问「父之兄弟」模块的私有成员
+    // inspect!( super::super::x::X_PRIVATE); // ❌ 换种写法照样不行
 }
