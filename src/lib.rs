@@ -1,5 +1,6 @@
 pub mod a;
 mod x; // x 是私有的，只有 lib 和它的后代能看
+pub use x::X_PUB as X_PUB_RE; // 供 main.rs 调用
 pub const LIB_PUB: &str = "LIB_PUB";
 const LIB_PRIVATE: &str = "LIB_PRIVATE";
 
