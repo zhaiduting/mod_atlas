@@ -2,7 +2,7 @@ pub const PUBLIC: &str = "ok";
 const PRIVATE: &str = "ok";
 
 pub fn visit() {
-    println!("\n>>> X_VISIT in private mod of lib.rs");
+    header!("Private Sub-mod");
 
     // 1. 访问父模块 lib
     inspect!(super::PUBLIC);

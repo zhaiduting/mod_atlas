@@ -13,4 +13,6 @@ fn main() {
     //  权限测试
     // println!("{}", mod_atlas::child::PRIVATE); // ❌
     // println!("{}", mod_atlas::sibling::PUBLIC); // ❌ 无法访问私有模块的任何成员
+
+    println!();
 }

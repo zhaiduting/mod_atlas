@@ -5,7 +5,7 @@ pub(crate) const PUB_CRATE: &str = "ok";
 pub(super) const PUB_SUPER: &str = "ok";
 
 pub fn visit() {
-    println!("\n>>> {} visit", module_path!());
+    header!("Deep Mod");
 
     // 1. 访问父模块肯定没问题（在 child 中已验证）
     // 2. 访问「祖父」 
@@ -15,5 +15,7 @@ pub fn visit() {
     // 3. 访问「远亲」 
     inspect!(crate::sibling::PUBLIC);
     // inspect!(crate::sibling::PRIVATE); // ❌ 无法访问「父之兄弟」模块的私有成员
+    inspect!(crate::sibling::PRIVATE, X); // ❌ 无法访问「父之兄弟」模块的私有成员
     // inspect!(super::super::sibling::PRIVATE); // ❌ 换种写法照样不行
+    inspect!(super::super::sibling::PRIVATE, X); // ❌ 换种写法照样不行
 }
